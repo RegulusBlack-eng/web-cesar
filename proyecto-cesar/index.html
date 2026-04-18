@@ -1,119 +1,217 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>César Electrónica | Servicio Técnico Profesional</title>
+    <title>César Electrónica | Laboratorio de Microelectrónica Premium | Moreno</title>
+    <meta name="description" content="Servicio técnico especializado en reparación de Smart TVs, Audio Hi-Fi y microelectrónica de precisión en Moreno, Trujui. Calidad garantizada.">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        'brand-bg': '#030303', // Casi negro absoluto
+                        'brand-ui': '#0a0a0a', // Gris oscuro para tarjetas
+                        'brand-border': '#1a1a1a', // Borde sutil
+                        'brand-blue': '#0055ff', // Azul Eléctrico Vibrante
+                        'brand-blue-hover': '#0044cc',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        body { background-color: #09090b; }
-        .glass { background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(63, 63, 70, 0.4); }
-        .orange-glow { box-shadow: 0 0 20px rgba(249, 115, 22, 0.2); }
+        /* CSS custom para efectos senior */
+        body { background-color: #030303; }
+        
+        /* Efecto Glassmorphism refinado */
+        .glass { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(26, 26, 26, 0.6); }
+        
+        /* Brillo azul sutil */
+        .blue-glow { box-shadow: 0 0 30px rgba(0, 85, 255, 0.15); }
+        
+        /* Animación de revelación al scroll (Nativa de Chrome moderne) */
+        @supports (animation-timeline: view()) {
+            .reveal {
+                animation: revealAnimation linear both;
+                animation-timeline: view();
+                animation-range: entry 20% cover 40%;
+            }
+        }
+        @keyframes revealAnimation {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Ocultar scrollbar pero mantener funcionalidad */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
-<body class="text-zinc-100 selection:bg-orange-500/30">
+<body class="text-zinc-100 selection:bg-brand-blue/20 antialiased overflow-x-hidden">
 
-    <nav class="flex justify-between items-center px-6 py-4 border-b border-zinc-800 sticky top-0 z-50 bg-[#09090b]/80 backdrop-blur-md">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-orange-600 rounded flex items-center justify-center font-black text-black text-xl italic">C</div>
-            <span class="font-bold text-xl tracking-tight">CÉSAR <span class="text-zinc-500 font-light">ELECTRÓNICA</span></span>
+    <div class="fixed inset-0 -z-50 overflow-hidden opacity-30">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-[128px] animate-blob"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-zinc-800 rounded-full blur-[128px] animate-blob animation-delay-2000"></div>
+    </div>
+
+    <nav class="flex justify-between items-center px-6 md:px-12 py-4 border-b border-brand-border sticky top-0 z-50 bg-brand-bg/80 backdrop-blur-lg">
+        <div class="flex items-center gap-2 group">
+            <div class="w-9 h-9 border-2 border-brand-blue rounded-md flex items-center justify-center font-black text-brand-blue text-2xl group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">C</div>
+            <span class="font-extrabold text-xl tracking-tighter">CÉSAR <span class="text-zinc-600 font-light">ELECTRÓNICA</span></span>
         </div>
-        <div class="hidden md:flex gap-6 text-sm text-zinc-400 font-medium">
-            <a href="#servicios" class="hover:text-white transition">Servicios</a>
-            <a href="#proceso" class="hover:text-white transition">Garantía</a>
-            <a href="#contacto" class="hover:text-white transition">Ubicación</a>
+        <div class="hidden md:flex gap-8 text-xs text-zinc-500 font-semibold uppercase tracking-widest">
+            <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
+            <a href="#proceso" class="hover:text-white transition-colors">Garantía</a>
+            <a href="#contacto" class="hover:text-white transition-colors">Ubicación</a>
         </div>
-        <a href="https://wa.me/541122334455" class="bg-zinc-100 text-black px-4 py-2 rounded-md text-sm font-bold hover:bg-orange-500 hover:text-white transition duration-300">
-            PRESUPUESTO
+        <a href="https://wa.me/541122334455" class="bg-zinc-50 text-brand-bg px-5 py-2 rounded-full text-sm font-bold hover:bg-brand-blue hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95">
+            SOLICITAR TURNO
         </a>
     </nav>
 
-    <section class="relative pt-24 pb-20 px-6 max-w-5xl mx-auto text-center">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-500 text-xs font-bold mb-6">
-            <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+    <section class="relative min-h-[90vh] flex flex-col items-center justify-center px-6 max-w-7xl mx-auto text-center overflow-hidden">
+        
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-brand-blue/30 bg-brand-blue/5 text-brand-blue text-xs font-bold mb-8 animate-fade-in-up">
+            <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-blue"></span>
             </span>
-            TALLER ACTIVO EN TRUJUI
+            LABORATORIO TÉCNICO ACTIVO EN TRUJUI
         </div>
-        <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tighter bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent italic">
-            EL FUTURO DE TU<br>EQUIPO ES HOY.
+
+        <h1 class="text-6xl md:text-9xl font-black mb-8 tracking-tighter leading-[0.95] bg-gradient-to-b from-white via-zinc-300 to-zinc-700 bg-clip-text text-transparent transform transition-transform duration-500 animate-fade-in-up animation-delay-200">
+            INGENIERÍA <br> APLICADA A <br> TU EQUIPO.
         </h1>
-        <p class="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Laboratorio especializado en microelectrónica. Recuperamos equipos que otros dan por perdidos. Calidad certificada y repuestos originales.
+
+        <p class="text-zinc-500 text-lg md:text-2xl max-w-3xl mx-auto mb-14 leading-relaxed font-light animate-fade-in-up animation-delay-400">
+            Especialistas en microelectrónica de precisión. Revivimos tecnología de alta gama que otros descartan. Smart TVs, Audio Profesional y Sistemas Complejos.
         </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="https://wa.me/541122334455" class="bg-orange-600 px-8 py-4 rounded-lg font-black text-lg hover:bg-orange-500 transition orange-glow">
-                ENVIAR CONSULTA <i class="fa-brands fa-whatsapp ml-2"></i>
-            </a>
-            <a href="#servicios" class="bg-zinc-900 border border-zinc-700 px-8 py-4 rounded-lg font-black text-lg hover:bg-zinc-800 transition">
-                VER CATÁLOGO
-            </a>
-        </div>
-    </section>
 
-    <div class="border-y border-zinc-800 py-8 bg-zinc-900/50">
-        <div class="max-w-6xl mx-auto px-6 flex flex-wrap justify-center gap-8 md:gap-16 opacity-30 grayscale hover:grayscale-0 transition duration-500">
-            <span class="font-black text-2xl italic">SAMSUNG</span>
-            <span class="font-black text-2xl italic">SONY</span>
-            <span class="font-black text-2xl italic">LG</span>
-            <span class="font-black text-2xl italic">PHILCO</span>
-            <span class="font-black text-2xl italic">NOBLEX</span>
-        </div>
-    </div>
-
-    <section id="servicios" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="mb-16">
-            <h2 class="text-4xl font-black mb-4 italic italic uppercase tracking-tighter">Servicios Destacados</h2>
-            <div class="w-20 h-2 bg-orange-600"></div>
+        <div class="flex flex-col sm:flex-row justify-center gap-5 animate-fade-in-up animation-delay-600">
+            <a href="https://wa.me/541122334455" class="bg-brand-blue text-white px-10 py-5 rounded-xl font-extrabold text-xl hover:bg-brand-blue-hover transition-all duration-300 transform hover:-translate-y-1 blue-glow">
+                CONSULTA TÉCNICA <i class="fa-brands fa-whatsapp ml-2"></i>
+            </a>
+            <a href="#servicios" class="bg-brand-ui border border-brand-border px-10 py-5 rounded-xl font-extrabold text-xl hover:bg-zinc-800 transition-colors">
+                NUESTROS SERVICIOS
+            </a>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glass p-8 rounded-2xl group hover:-translate-y-2 transition duration-300">
-                <div class="w-14 h-14 bg-orange-600/20 text-orange-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-orange-600 group-hover:text-white transition">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3 uppercase italic">Microelectrónica</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Reparación a nivel componente. Cambiamos integrados y reparamos pistas dañadas con microscopio de alta precisión.</p>
+        <a href="#servicios" class="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-700 hover:text-white transition-colors animate-bounce">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </a>
+    </section>
+
+    <section id="servicios" class="py-32 px-6 max-w-7xl mx-auto reveal">
+        <div class="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-brand-border pb-10">
+            <div>
+                <p class="text-brand-blue font-bold uppercase tracking-widest text-sm mb-2">Expertise Técnico</p>
+                <h2 class="text-5xl md:text-6xl font-black tracking-tighter leading-none">Nuestras Especialidades</h2>
             </div>
-            <div class="glass p-8 rounded-2xl group hover:-translate-y-2 transition duration-300 border-orange-500/20 shadow-xl shadow-orange-500/5">
-                <div class="w-14 h-14 bg-orange-600 text-white rounded-xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-orange-500/20">
+            <div class="h-1 text-zinc-800 text-6xl font-black italic">01</div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-10 rounded-3xl group border-brand-border hover:border-brand-blue/40 transition-all duration-500">
+                <div class="w-16 h-16 bg-brand-blue/10 text-brand-blue rounded-2xl flex items-center justify-center text-3xl mb-10 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300 transform group-hover:scale-110">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold mb-5 uppercase tracking-tight">Microelectrónica</h3>
+                <p class="text-zinc-500 text-base leading-relaxed mb-6">Soldadura BGA, reballing y cambio de integrados a nivel componente bajo microscopio. Recuperación de pistas y placas principales.</p>
+                <span class="text-brand-blue font-bold text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">Precisión Absoluta</span>
+            </div>
+            
+            <div class="glass p-10 rounded-3xl group border-brand-blue shadow-2xl shadow-brand-blue/5 relative overflow-hidden transform hover:-translate-y-3 transition-all duration-500">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/20 blur-[64px] rounded-full"></div>
+                <div class="w-16 h-16 bg-brand-blue text-white rounded-2xl flex items-center justify-center text-3xl mb-10 shadow-lg shadow-brand-blue/20">
                     <i class="fa-solid fa-tv"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3 uppercase italic text-orange-500">Smart TVs 4K/8K</h3>
-                <p class="text-zinc-400 text-sm leading-relaxed font-medium">Especialistas en backlight LED y placas Main. Presupuestos sin cargo para toda la línea de Moreno.</p>
+                <h3 class="text-2xl font-extrabold mb-5 uppercase tracking-tight text-white">Smart TVs 4K/8K</h3>
+                <p class="text-zinc-300 text-base leading-relaxed font-medium mb-6">Diagnóstico y reparación de fallas de Backlight LED, fuentes de poder y placas Main de todas las marcas líderes. Presupuestos sin cargo.</p>
+                 <span class="text-white font-bold text-sm tracking-widest uppercase">Especialidad de la Casa</span>
             </div>
-            <div class="glass p-8 rounded-2xl group hover:-translate-y-2 transition duration-300">
-                <div class="w-14 h-14 bg-orange-600/20 text-orange-500 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-orange-600 group-hover:text-white transition">
+            
+            <div class="glass p-10 rounded-3xl group border-brand-border hover:border-brand-blue/40 transition-all duration-500">
+                <div class="w-16 h-16 bg-brand-blue/10 text-brand-blue rounded-2xl flex items-center justify-center text-3xl mb-10 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300 transform group-hover:scale-110">
                     <i class="fa-solid fa-volume-high"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3 uppercase italic">Audio Hi-Fi</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Potencias, amplificadores de gama alta y consolas. Volvé a escuchar tu música con la fidelidad original.</p>
+                <h3 class="text-2xl font-extrabold mb-5 uppercase tracking-tight">Audio Profesional</h3>
+                <p class="text-zinc-500 text-base leading-relaxed mb-6">Mantenimiento y reparación de amplificadores de gama alta, consolas, potencias y sistemas de sonido de alta fidelidad.</p>
+                 <span class="text-brand-blue font-bold text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">Sonido Puro</span>
             </div>
         </div>
     </section>
 
-    <section id="contacto" class="py-24 px-6 bg-orange-600 text-black">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-            <div class="max-w-md">
-                <h2 class="text-5xl font-black uppercase italic leading-none mb-6 tracking-tighter">Atención Local<br>en Moreno</h2>
-                <p class="text-orange-100 font-medium text-lg">Visitá nuestro taller en Trujui. Trabajamos con transparencia: diagnóstico real y repuestos a la vista.</p>
+    <section id="contacto" class="py-32 px-6 bg-zinc-50 text-brand-bg reveal rounded-t-[48px]">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-16 p-10">
+            <div class="max-w-xl">
+                <p class="text-brand-blue font-bold uppercase tracking-widest text-sm mb-2">Presencia Local</p>
+                <h2 class="text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8">Atención Especializada en Moreno</h2>
+                <p class="text-zinc-700 font-medium text-xl leading-relaxed">Nuestro laboratorio está estratégicamente ubicado en el barrio de Trujui. Brindamos soporte técnico a toda la zona con la máxima transparencia y repuestos originales.</p>
             </div>
-            <div class="bg-black text-white p-8 rounded-3xl w-full md:w-auto shadow-2xl">
-                <h4 class="font-black text-2xl mb-4 italic uppercase">Contacto Directo</h4>
-                <p class="mb-2 text-zinc-400 font-bold uppercase tracking-widest text-xs">Ubicación</p>
-                <p class="text-lg mb-6">Barrio Trujui, Moreno, Bs.As.</p>
-                <p class="mb-2 text-zinc-400 font-bold uppercase tracking-widest text-xs">Horarios</p>
-                <p class="text-lg mb-6">Lun a Vie: 09:00 - 18:00</p>
-                <a href="https://wa.me/541122334455" class="block text-center bg-orange-600 p-4 rounded-xl font-black hover:bg-orange-500 transition italic">ESTOY LLEGANDO</a>
+            <div class="bg-brand-bg text-white p-12 rounded-3xl w-full lg:w-auto shadow-2xl transform hover:rotate-2 transition-transform duration-500 border border-brand-border">
+                <h4 class="font-black text-3xl mb-6 tracking-tight">Datos de Contacto</h4>
+                
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-zinc-600 font-bold uppercase tracking-widest text-xs mb-1.5">Ubicación</p>
+                        <p class="text-xl font-medium">Barrio Trujui, Moreno, Bs.As.</p>
+                    </div>
+                    <div>
+                        <p class="text-zinc-600 font-bold uppercase tracking-widest text-xs mb-1.5">Horarios de Recepción</p>
+                        <p class="text-xl font-medium">Lun a Vie: 09:00 - 18:00</p>
+                        <p class="text-xl font-medium text-brand-blue">Sábados: Con turno previo</p>
+                    </div>
+                    <div>
+                        <p class="text-zinc-600 font-bold uppercase tracking-widest text-xs mb-1.5">WhatsApp Técnico</p>
+                        <p class="text-2xl font-extrabold">+54 11 1234-5678</p>
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/541122334455" class="block text-center bg-brand-blue p-5 rounded-xl font-extrabold text-lg mt-10 hover:bg-brand-blue-hover transition-colors shadow-lg shadow-brand-blue/10">
+                    PEDIR TURNO POR WHATSAPP <i class="fa-brands fa-whatsapp ml-1.5"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 border-t border-zinc-800 text-center">
-        <p class="text-zinc-600 text-[10px] tracking-[0.3em] font-bold uppercase">César Electrónica Lab &copy; 2026 - Moreno, Argentina</p>
+    <footer class="py-16 border-t border-brand-border text-center bg-brand-bg relative z-10">
+        <div class="flex items-center justify-center gap-2 mb-6">
+            <div class="w-8 h-8 border-2 border-zinc-800 rounded flex items-center justify-center font-black text-zinc-800 text-xl">C</div>
+            <span class="font-bold text-lg text-zinc-800 tracking-tighter">CÉSAR ELECTRÓNICA</span>
+        </div>
+        <p class="text-zinc-700 text-[11px] tracking-[0.4em] font-bold uppercase">© 2026 Laboratorio TÉCNICO de Microelectrónica - Moreno, Argentina</p>
+        <p class="text-zinc-800 text-[9px] mt-2">Desplegado en Vercel via GitHub Pipeline</p>
     </footer>
+
+    <a href="https://wa.me/541122334455" class="fixed bottom-10 right-10 bg-brand-blue hover:bg-brand-blue-hover text-white w-18 h-18 rounded-full flex items-center justify-center text-3xl shadow-2xl z-50 transition-all duration-300 hover:scale-110 active:scale-95 blue-glow group">
+        <i class="fa-brands fa-whatsapp group-hover:rotate-12 transition-transform"></i>
+    </a>
 
 </body>
 </html>
