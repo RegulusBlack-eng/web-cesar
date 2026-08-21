@@ -1,82 +1,74 @@
-"use client";
-
 import dynamic from "next/dynamic";
-import { ArrowUpRight, Sparkles, Terminal } from "lucide-react";
 
-const HeroCanvas = dynamic(() => import("../components/HeroCanvas"), {
-  ssr: false,
-  loading: () => <div className="absolute inset-0 bg-obsidian-void -z-10" />,
-});
+// IMPORTANTE: Cargamos Three.js de forma dinámica para evitar que Next.js 
+// intente renderizar el canvas en el servidor (SSR) y lance errores.
+const HeroCanvas = dynamic(() => import("@/components/HeroCanvas"), { ssr: false });
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col justify-between p-6 md:p-12 overflow-hidden bg-obsidian-void text-titanium">
-      <HeroCanvas />
+    <main className="relative min-h-screen bg-black text-white overflow-hidden font-sans">
+      {/* CAPA 0: Canvas 3D de fondo */}
+      <div className="absolute inset-0 z-0 pointer-events-auto">
+        <HeroCanvas />
+      </div>
 
-      {/* Header */}
-      <header className="flex justify-between items-center w-full max-w-7xl mx-auto z-10">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-photonic-blue animate-pulse" />
-          <span className="font-syne font-extrabold text-xl tracking-wider text-white">
-            CÉSAR<span className="text-photonic-blue">.</span>
-          </span>
-        </div>
+      {/* CAPA 1: Interfaz de Usuario (UI) */}
+      <div className="relative z-10 flex flex-col min-h-screen p-6 md:p-12 lg:p-24 pointer-events-none">
+        
+        {/* Header / Navegación */}
+        <header className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-16 gap-6 pointer-events-auto">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-2xl font-bold tracking-tighter uppercase">César.</h1>
+            <p className="text-xs md:text-sm text-gray-400 font-mono uppercase tracking-widest">
+              // 01. SERVICIOS // 02. SHOWCASE // 03. STACK
+            </p>
+          </div>
+          <button className="text-sm font-mono tracking-widest uppercase border-b border-transparent hover:border-cyan-400 transition-colors pb-1 text-cyan-400">
+            Contacto ↗
+          </button>
+        </header>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-mono text-titanium-muted">
-          <span className="text-white hover:text-photonic-blue transition-colors cursor-pointer">// 01. SERVICIOS</span>
-          <span className="hover:text-photonic-blue transition-colors cursor-pointer">// 02. SHOWCASE</span>
-          <span className="hover:text-photonic-blue transition-colors cursor-pointer">// 03. STACK</span>
-        </nav>
-
-        <button className="glass-panel px-5 py-2.5 rounded-full text-xs font-mono flex items-center gap-2 hover:border-photonic-blue transition-all">
-          <span>CONTACTO</span>
-          <ArrowUpRight className="w-4 h-4 text-photonic-blue" />
-        </button>
-      </header>
-
-      {/* Hero Content */}
-      <section className="w-full max-w-7xl mx-auto my-auto py-20 z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div className="lg:col-span-9 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-obsidian-border bg-obsidian-card/50 text-xs font-mono text-solar-amber">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>ESTUDIO DE INGENIERÍA CREATIVA</span>
+        {/* Hero Section (Contenido Principal) */}
+        <div className="flex-1 flex flex-col justify-center max-w-4xl pointer-events-auto">
+          <div className="flex items-center gap-3 text-cyan-400 mb-6 font-mono text-sm uppercase tracking-widest">
+            <span className="text-xl animate-pulse">✧</span>
+            <h2>Estudio de Ingeniería Creativa</h2>
           </div>
 
-          <h1 className="font-syne font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight text-white leading-none">
-            INGENIERÍA WEB <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-photonic-blue via-titanium to-solar-amber">
-              DE ULTRA IMPACTO.
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter mb-8 uppercase">
+            Ingeniería Web <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-600">
+              De Ultra Impacto.
             </span>
-          </h1>
+          </h2>
 
-          <p className="text-lg md:text-xl text-titanium-muted max-w-2xl font-sans font-normal leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl leading-relaxed">
             Interfaces de alta gama, experiencias 3D inmersivas y arquitectura de software bespoke diseñadas para destacar.
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <button className="px-8 py-4 rounded-xl bg-photonic-blue hover:bg-blue-600 text-white font-mono text-sm font-semibold transition-all glow-cobalt flex items-center gap-2">
-              <span>EXPLORAR SHOWCASE</span>
-              <ArrowUpRight className="w-4 h-4" />
+          {/* Botonera con espaciado correcto (Flex Gap) */}
+          <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-12">
+            <button className="group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-widest overflow-hidden rounded-sm transition-transform hover:scale-105">
+              <span className="relative z-10 flex items-center gap-2">
+                Explorar Showcase
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
             </button>
-            <button className="glass-card px-8 py-4 rounded-xl font-mono text-sm font-semibold text-titanium flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-photonic-blue" />
-              <span>TECH STACK</span>
+
+            <button className="px-8 py-4 border border-white/20 text-white font-mono uppercase tracking-widest hover:bg-white/10 transition-colors rounded-sm backdrop-blur-sm">
+              &gt;_ Tech Stack
             </button>
           </div>
         </div>
-      </section>
 
-      {/* Footer Bar */}
-      <footer className="w-full max-w-7xl mx-auto z-10 flex flex-col md:flex-row justify-between items-center pt-8 border-t border-obsidian-border text-xs font-mono text-titanium-muted gap-4">
-        <div className="flex items-center gap-4">
-          <span>FPS: 60 [STABLE]</span>
-          <span>•</span>
-          <span>WEBGL 2.0</span>
+        {/* Footer Técnico */}
+        <div className="mt-auto pt-8 border-t border-white/10 font-mono text-xs text-gray-500 uppercase tracking-widest flex flex-col md:flex-row justify-between gap-4">
+          <p>FPS: 60 [STABLE] • WEBGL 2.0</p>
+          <p>BUILT WITH NEXT.JS 14 & THREE.JS</p>
         </div>
-        <div>
-          <span>BUILT WITH NEXT.JS 14 & THREE.JS</span>
-        </div>
-      </footer>
+      </div>
     </main>
   );
 }
