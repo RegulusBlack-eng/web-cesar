@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: #080a0f;
+  color: #e2e8f0;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: var(--font-jakarta), sans-serif;
+  background: #080a0f;
+}
+
+/* Glassmorphism & custom utility glow */
+.glass-panel {
+  background: rgba(17, 22, 35, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(17, 22, 35, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.15);
+  transform: translateY(-2px);
+}
+
+.glow-cobalt {
+  box-shadow: 0 0 40px -10px rgba(37, 99, 235, 0.4);
+}
