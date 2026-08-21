@@ -1,46 +1,41 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, PerspectiveCamera } from "@react-three/drei";
-import { useRef } from "react";
-import * as THREE from "three";
-
-function KineticPrism() {
-  const meshRef = useRef<THREE.Mesh>(null!);
-
-  useFrame((_, delta) => {
-    meshRef.current.rotation.x += delta * 0.2;
-    meshRef.current.rotation.y += delta * 0.3;
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
-      <mesh ref={meshRef} scale={2.2}>
-        <icosahedronGeometry args={[1, 0]} />
-        <MeshDistortMaterial
-          color="#2563EB"
-          emissive="#080A0F"
-          roughness={0.1}
-          metalness={0.8}
-          distort={0.35}
-          speed={2}
-          wireframe
-        />
-      </mesh>
-    </Float>
-  );
-}
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Float, PerspectiveCamera } from "@react-three/drei";
 
 export default function HeroCanvas() {
   return (
-    <div className="w-full h-full absolute inset-0 -z-10 opacity-70 pointer-events-none">
-      <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 0, 6]} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1.5} color="#2563EB" />
-        <pointLight position={[-10, -10, -5]} intensity={1} color="#F59E0B" />
-        <KineticPrism />
-      </Canvas>
-    </div>
+    <Canvas className="w-full h-full bg-black/90">
+      <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={45} />
+      
+      {/* Iluminación base */}
+      <ambientLight intensity={0.2} />
+      <directionalLight position={[10, 10, 5]} intensity={2} color="#00ffff" />
+      <directionalLight position={[-10, -10, -5]} intensity={1} color="#ff00ff" />
+      
+      {/* Geometría Flotante */}
+      <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
+        <mesh rotation={[Math.PI / 4, Math.PI / 4, 0]} position={[3, 0, -2]}>
+          <icosahedronGeometry args={[2, 1]} />
+          {/* Modo wireframe para ese look de ingeniería */}
+          <meshStandardMaterial 
+            color="#06b6d4" 
+            wireframe 
+            transparent 
+            opacity={0.3} 
+          />
+        </mesh>
+      </Float>
+
+      {/* Controles: Permitimos rotar pero bloqueamos el zoom para no arruinar el layout */}
+      <OrbitControls 
+        enableZoom={false} 
+        enablePan={false} 
+        autoRotate 
+        autoRotateSpeed={0.8}
+        maxPolarAngle={Math.PI / 2 + 0.2}
+        minPolarAngle={Math.PI / 3}
+      />
+    </Canvas>
   );
 }
